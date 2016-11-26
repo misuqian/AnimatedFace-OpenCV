@@ -11,6 +11,6 @@ OutlineDetect,EdgeDetect,PasserDetect(HOG),FaceDetect(FeatureDetector)
 Histo,MixImage(Mat add)
 
 #FaceEffect-2D
-auto detect face eye and attath gif image
+auto detect face eye and attach gif image
 
 #FaceEffect-3D
