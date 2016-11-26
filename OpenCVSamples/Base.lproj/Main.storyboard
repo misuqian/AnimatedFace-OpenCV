@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PYQ-Ve-7W7">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--OpenCV Samples-->
+        <scene sceneID="vlg-CV-Vta">
+            <objects>
+                <tableViewController id="CXu-Y3-NiN" customClass="MainTableVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lGh-Cb-dsp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="CXu-Y3-NiN" id="IO6-b4-PMe"/>
+                            <outlet property="delegate" destination="CXu-Y3-NiN" id="Aoh-6V-OcS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="OpenCV Samples" id="alc-Xy-NSb">
+                        <barButtonItem key="backBarButtonItem" title="Home" id="tRX-4N-gF9"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="6Bd-Ft-b6w" kind="show" identifier="摄像头动态处理" id="MXC-6S-LtF"/>
+                        <segue destination="nE1-Uo-lcY" kind="show" identifier="摄像头拍照处理" id="faf-wX-YQe"/>
+                        <segue destination="9Ai-1u-MqP" kind="show" identifier="脸部检测" id="A7t-Vf-PXX"/>
+                        <segue destination="QAo-fo-mml" kind="show" identifier="图片合成" id="VA7-gT-eQr"/>
+                        <segue destination="iR9-MU-HUy" kind="show" identifier="脸部特效2D" id="JCz-oJ-fZ6"/>
+                        <segue destination="rDs-h1-0QU" kind="show" identifier="脸部特效3D" id="z36-jB-o1h"/>
+                        <segue destination="HJn-Y9-UB6" kind="show" id="hFd-g2-Uyv"/>
+                        <segue destination="IJw-lD-6ND" kind="show" identifier="行人HOG检测" id="jNn-8X-pPI"/>
+                        <segue destination="Uhj-Vj-Wxw" kind="show" identifier="边缘检测" id="pw5-NS-94o"/>
+                        <segue destination="twm-A1-HTK" kind="show" identifier="轮廓检测" id="LAj-gP-3mR"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I8d-Gc-nFr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="354" y="114"/>
+        </scene>
+        <!--摄像头动态处理-->
+        <scene sceneID="PCI-28-mXx">
+            <objects>
+                <viewController id="6Bd-Ft-b6w" customClass="VideoCameraVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VJ1-X6-bcz"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gm7-yv-5ju"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A5j-HN-w1G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gm1-9c-6fx">
+                                <color key="backgroundColor" red="0.51784205439999997" green="0.58159953360000005" blue="0.58617168659999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLC-yd-M9a">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="8GG-E3-lhV"/>
+                                    <constraint firstAttribute="width" constant="100" id="Suq-8f-Onj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="开始"/>
+                                <connections>
+                                    <action selector="startTap:" destination="6Bd-Ft-b6w" eventType="touchUpInside" id="xIv-V5-KnJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gm1-9c-6fx" secondAttribute="trailing" constant="10" id="2Z0-Cm-xOa"/>
+                            <constraint firstItem="gm1-9c-6fx" firstAttribute="leading" secondItem="A5j-HN-w1G" secondAttribute="leading" constant="10" id="75S-D9-Sml"/>
+                            <constraint firstItem="gm1-9c-6fx" firstAttribute="top" secondItem="VJ1-X6-bcz" secondAttribute="bottom" constant="10" id="7ag-X2-ODb"/>
+                            <constraint firstItem="hLC-yd-M9a" firstAttribute="top" secondItem="gm1-9c-6fx" secondAttribute="bottom" constant="10" id="7lj-Kg-daL"/>
+                            <constraint firstItem="Gm7-yv-5ju" firstAttribute="top" secondItem="hLC-yd-M9a" secondAttribute="bottom" constant="20" id="Nhf-d1-ioG"/>
+                            <constraint firstItem="hLC-yd-M9a" firstAttribute="centerX" secondItem="A5j-HN-w1G" secondAttribute="centerX" id="rKC-d9-ZpN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="摄像头动态处理" id="rS2-Wb-ZWJ"/>
+                    <connections>
+                        <outlet property="imageView" destination="gm1-9c-6fx" id="dty-AL-m6h"/>
+                        <outlet property="startButton" destination="hLC-yd-M9a" id="NxC-IF-Y5s"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qUd-BR-Rr2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="-161"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="X8w-eX-LsW">
+            <objects>
+                <navigationController id="PYQ-Ve-7W7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tyk-FO-uWX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CXu-Y3-NiN" kind="relationship" relationship="rootViewController" id="TPa-3m-etf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBy-8c-gOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-423" y="114"/>
+        </scene>
+        <!--摄像头拍照处理-->
+        <scene sceneID="sf0-cV-tu4">
+            <objects>
+                <viewController id="nE1-Uo-lcY" customClass="PhotoCameraVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bey-gO-K23"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zjc-rB-yzB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="khX-SJ-a1Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LXA-OH-Ng9">
+                                <color key="backgroundColor" red="0.51784205439999997" green="0.58159953360000005" blue="0.58617168659999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3JX-2b-cTu">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="5UX-w1-kO8"/>
+                                    <constraint firstAttribute="width" constant="100" id="jNH-4t-2Mx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="拍照"/>
+                                <connections>
+                                    <action selector="takePic:" destination="nE1-Uo-lcY" eventType="touchUpInside" id="qW3-sS-ipy"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gPD-cs-2th">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Qeg-ZU-wEs"/>
+                                    <constraint firstAttribute="height" constant="200" id="uE6-XU-iNx"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSJ-zi-8ku">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Ytt-wF-HqE"/>
+                                    <constraint firstAttribute="height" constant="36" id="xf0-Xx-9Bo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="开始"/>
+                                <connections>
+                                    <action selector="startTap:" destination="nE1-Uo-lcY" eventType="touchUpInside" id="Ehf-rY-OZq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zjc-rB-yzB" firstAttribute="top" secondItem="3JX-2b-cTu" secondAttribute="bottom" constant="20" id="DXJ-uE-eNr"/>
+                            <constraint firstItem="3JX-2b-cTu" firstAttribute="top" secondItem="gPD-cs-2th" secondAttribute="bottom" constant="20" id="IbU-ds-g5g"/>
+                            <constraint firstItem="NSJ-zi-8ku" firstAttribute="centerX" secondItem="khX-SJ-a1Y" secondAttribute="centerX" constant="-80" id="WIg-mG-lNH"/>
+                            <constraint firstItem="LXA-OH-Ng9" firstAttribute="top" secondItem="bey-gO-K23" secondAttribute="bottom" constant="10" id="YA6-9s-Frb"/>
+                            <constraint firstItem="3JX-2b-cTu" firstAttribute="top" secondItem="LXA-OH-Ng9" secondAttribute="bottom" constant="10" id="YLw-OO-zm0"/>
+                            <constraint firstAttribute="trailing" secondItem="gPD-cs-2th" secondAttribute="trailing" constant="20" id="ZRX-5P-YFs"/>
+                            <constraint firstAttribute="trailing" secondItem="LXA-OH-Ng9" secondAttribute="trailing" constant="10" id="diL-XQ-Ecm"/>
+                            <constraint firstItem="Zjc-rB-yzB" firstAttribute="top" secondItem="NSJ-zi-8ku" secondAttribute="bottom" constant="20" id="g6d-oy-2oD"/>
+                            <constraint firstItem="3JX-2b-cTu" firstAttribute="centerX" secondItem="khX-SJ-a1Y" secondAttribute="centerX" constant="80" id="iDH-Hf-jgd"/>
+                            <constraint firstItem="LXA-OH-Ng9" firstAttribute="leading" secondItem="khX-SJ-a1Y" secondAttribute="leading" constant="10" id="o1Z-cf-3BB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="摄像头拍照处理" id="f6r-HJ-bkg"/>
+                    <connections>
+                        <outlet property="imageView" destination="LXA-OH-Ng9" id="5Qe-xZ-W6y"/>
+                        <outlet property="thumbImageView" destination="gPD-cs-2th" id="fAe-3K-zUQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tgj-jM-FY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="525"/>
+        </scene>
+        <!--图片合成-->
+        <scene sceneID="c3k-fO-CSe">
+            <objects>
+                <viewController id="QAo-fo-mml" customClass="MixImage" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QjZ-SX-yfV"/>
+                        <viewControllerLayoutGuide type="bottom" id="EBu-Zd-Qcr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VHA-if-rph">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vwo-GK-dBE"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EBu-Zd-Qcr" firstAttribute="top" secondItem="vwo-GK-dBE" secondAttribute="bottom" constant="10" id="NNV-FW-1Ia"/>
+                            <constraint firstItem="vwo-GK-dBE" firstAttribute="top" secondItem="QjZ-SX-yfV" secondAttribute="bottom" constant="10" id="Pq4-vQ-uzP"/>
+                            <constraint firstAttribute="trailing" secondItem="vwo-GK-dBE" secondAttribute="trailing" constant="10" id="RTl-19-pm0"/>
+                            <constraint firstItem="vwo-GK-dBE" firstAttribute="leading" secondItem="VHA-if-rph" secondAttribute="leading" constant="10" id="XBl-A2-Fjr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="图片合成" id="ErO-fv-jcW">
+                        <barButtonItem key="rightBarButtonItem" title="选取照片" id="kuD-5V-a7W">
+                            <connections>
+                                <action selector="selectPhoto:" destination="QAo-fo-mml" id="BdB-kG-Rr5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="vwo-GK-dBE" id="XRW-eE-JbY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rDa-EO-301" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2109.5999999999999" y="524.8875562218891"/>
+        </scene>
+        <!--脸部检测-->
+        <scene sceneID="NtY-Qz-iFi">
+            <objects>
+                <viewController id="9Ai-1u-MqP" customClass="FaceDetect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8ao-BL-ZLB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rmi-4N-bvW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8uM-ls-zbd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XF6-2i-OZE"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XF6-2i-OZE" firstAttribute="leading" secondItem="8uM-ls-zbd" secondAttribute="leading" constant="10" id="5sd-0R-kaU"/>
+                            <constraint firstItem="XF6-2i-OZE" firstAttribute="top" secondItem="8ao-BL-ZLB" secondAttribute="bottom" constant="10" id="Lo1-2v-Vkw"/>
+                            <constraint firstAttribute="trailing" secondItem="XF6-2i-OZE" secondAttribute="trailing" constant="10" id="Ujx-Lc-bXv"/>
+                            <constraint firstItem="Rmi-4N-bvW" firstAttribute="top" secondItem="XF6-2i-OZE" secondAttribute="bottom" constant="10" id="ryx-d1-X4A"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="脸部检测" id="e72-Bg-gWu">
+                        <barButtonItem key="rightBarButtonItem" title="选取照片" id="98r-y2-7T9">
+                            <connections>
+                                <action selector="selectPhoto:" destination="9Ai-1u-MqP" id="FUX-va-IG0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="XF6-2i-OZE" id="YJP-6k-10I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vyd-DV-2US" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2111" y="-161"/>
+        </scene>
+        <!--脸部特效2D-->
+        <scene sceneID="eKo-qj-go2">
+            <objects>
+                <viewController id="iR9-MU-HUy" customClass="FaceEffect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hKk-z2-OUc"/>
+                        <viewControllerLayoutGuide type="bottom" id="NJc-de-puO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dh1-E5-6QL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6XO-c5-2bB">
+                                <color key="backgroundColor" red="0.51784205439999997" green="0.58159953360000005" blue="0.58617168659999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRV-Vu-VqT">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="8id-GC-ugG"/>
+                                    <constraint firstAttribute="width" constant="100" id="gUY-VW-kOf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="开始"/>
+                                <connections>
+                                    <action selector="startTap:" destination="iR9-MU-HUy" eventType="touchUpInside" id="j4U-EW-HZz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qRV-Vu-VqT" firstAttribute="top" secondItem="6XO-c5-2bB" secondAttribute="bottom" constant="10" id="Jiy-xa-LLe"/>
+                            <constraint firstItem="NJc-de-puO" firstAttribute="top" secondItem="qRV-Vu-VqT" secondAttribute="bottom" constant="20" id="KYs-U5-RBY"/>
+                            <constraint firstItem="6XO-c5-2bB" firstAttribute="leading" secondItem="Dh1-E5-6QL" secondAttribute="leading" constant="10" id="Vtl-3U-vSv"/>
+                            <constraint firstItem="6XO-c5-2bB" firstAttribute="top" secondItem="hKk-z2-OUc" secondAttribute="bottom" constant="10" id="drF-ZR-eRs"/>
+                            <constraint firstAttribute="trailing" secondItem="6XO-c5-2bB" secondAttribute="trailing" constant="10" id="ggd-6I-L8z"/>
+                            <constraint firstItem="qRV-Vu-VqT" firstAttribute="centerX" secondItem="Dh1-E5-6QL" secondAttribute="centerX" id="izB-gi-bhS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="脸部特效2D" id="rNk-eX-Sjn"/>
+                    <connections>
+                        <outlet property="imageView" destination="6XO-c5-2bB" id="eSc-Fd-deE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6u-Mb-bw3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="497" y="941"/>
+        </scene>
+        <!--行人HOG检测-->
+        <scene sceneID="RjC-rp-OLf">
+            <objects>
+                <viewController id="IJw-lD-6ND" customClass="PasserDetect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3e0-XA-5sN"/>
+                        <viewControllerLayoutGuide type="bottom" id="gXc-3g-raE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Na4-OO-yOG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PK1-wM-JUZ"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PK1-wM-JUZ" firstAttribute="leading" secondItem="Na4-OO-yOG" secondAttribute="leading" constant="10" id="9ez-og-Y05"/>
+                            <constraint firstAttribute="trailing" secondItem="PK1-wM-JUZ" secondAttribute="trailing" constant="10" id="Uh8-Lp-HIk"/>
+                            <constraint firstItem="gXc-3g-raE" firstAttribute="top" secondItem="PK1-wM-JUZ" secondAttribute="bottom" constant="10" id="hgX-fc-pnL"/>
+                            <constraint firstItem="PK1-wM-JUZ" firstAttribute="top" secondItem="3e0-XA-5sN" secondAttribute="bottom" constant="10" id="koo-xd-pEb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="行人HOG检测" id="KA7-iT-074">
+                        <barButtonItem key="rightBarButtonItem" title="选择照片" id="WhL-dH-nc8">
+                            <connections>
+                                <action selector="selectPhoto:" destination="IJw-lD-6ND" id="5jW-yt-1xK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="PK1-wM-JUZ" id="CVr-yR-00h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MGu-UH-Ffq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="497" y="1612"/>
+        </scene>
+        <!--边缘检测-->
+        <scene sceneID="fZu-yl-P1I">
+            <objects>
+                <viewController id="Uhj-Vj-Wxw" customClass="EdgeDetect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EGQ-rG-bZa"/>
+                        <viewControllerLayoutGuide type="bottom" id="WAS-Lx-Ai6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jqS-58-59z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PhH-lF-c0G"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PhH-lF-c0G" secondAttribute="trailing" constant="10" id="SL5-DB-g9k"/>
+                            <constraint firstItem="PhH-lF-c0G" firstAttribute="top" secondItem="EGQ-rG-bZa" secondAttribute="bottom" constant="10" id="YzI-Qh-Q7F"/>
+                            <constraint firstItem="WAS-Lx-Ai6" firstAttribute="top" secondItem="PhH-lF-c0G" secondAttribute="bottom" constant="10" id="aVA-mc-bZn"/>
+                            <constraint firstItem="PhH-lF-c0G" firstAttribute="leading" secondItem="jqS-58-59z" secondAttribute="leading" constant="10" id="n1B-QP-MVS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="边缘检测" id="hoK-Ol-hnM">
+                        <barButtonItem key="rightBarButtonItem" title="选择照片" id="hz7-Ix-1VH">
+                            <connections>
+                                <action selector="selectPhoto:" destination="Uhj-Vj-Wxw" id="g6y-cG-dXe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="PhH-lF-c0G" id="URM-Rv-VjY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KxS-6i-1Qm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-276" y="1613"/>
+        </scene>
+        <!--轮廓检测-->
+        <scene sceneID="GBF-gn-Y5f">
+            <objects>
+                <viewController id="twm-A1-HTK" customClass="OutlineDetect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LsG-KN-g8y"/>
+                        <viewControllerLayoutGuide type="bottom" id="jM0-Cd-O4v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AP0-Fg-MK5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Leu-Zb-EhH"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Leu-Zb-EhH" secondAttribute="trailing" constant="10" id="5I3-tQ-eou"/>
+                            <constraint firstItem="Leu-Zb-EhH" firstAttribute="top" secondItem="LsG-KN-g8y" secondAttribute="bottom" constant="10" id="5K3-De-zo0"/>
+                            <constraint firstItem="Leu-Zb-EhH" firstAttribute="leading" secondItem="AP0-Fg-MK5" secondAttribute="leading" constant="10" id="dtH-ES-yEg"/>
+                            <constraint firstItem="jM0-Cd-O4v" firstAttribute="top" secondItem="Leu-Zb-EhH" secondAttribute="bottom" constant="10" id="lmd-Rq-SlM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="轮廓检测" id="YbG-MJ-VgK">
+                        <barButtonItem key="rightBarButtonItem" title="选择照片" id="4hg-Ah-hVn">
+                            <connections>
+                                <action selector="selectPhoto:" destination="twm-A1-HTK" id="zjh-PU-rk0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="Leu-Zb-EhH" id="1pP-OO-8VV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Zi-Ze-R6z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-961" y="941"/>
+        </scene>
+        <!--直方图生成-->
+        <scene sceneID="LyR-oL-eUI">
+            <objects>
+                <viewController id="HJn-Y9-UB6" customClass="HistoVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aor-6D-YsM"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZKP-it-m2u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V4P-Km-8Yu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="直方图生成" id="msL-t4-dYe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8FS-yU-Yxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="1211"/>
+        </scene>
+        <!--脸部特效3D-->
+        <scene sceneID="pwp-Ch-HSm">
+            <objects>
+                <viewController id="rDs-h1-0QU" customClass="FaceEffect3D" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xa3-Mt-R81"/>
+                        <viewControllerLayoutGuide type="bottom" id="1vH-TT-tdx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sXf-Dp-bfL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mIX-vw-ZwD">
+                                <color key="backgroundColor" red="0.51784205439999997" green="0.58159953360000005" blue="0.58617168659999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7I-tm-oYA">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="eYd-Wy-qaa"/>
+                                    <constraint firstAttribute="height" constant="36" id="ogV-1j-JdX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="开始"/>
+                                <connections>
+                                    <action selector="startTap:" destination="rDs-h1-0QU" eventType="touchUpInside" id="FYp-32-sU0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z7I-tm-oYA" firstAttribute="centerX" secondItem="sXf-Dp-bfL" secondAttribute="centerX" id="6Lq-Jl-kz1"/>
+                            <constraint firstItem="1vH-TT-tdx" firstAttribute="top" secondItem="z7I-tm-oYA" secondAttribute="bottom" constant="20" id="GyG-tZ-rzv"/>
+                            <constraint firstItem="z7I-tm-oYA" firstAttribute="top" secondItem="mIX-vw-ZwD" secondAttribute="bottom" constant="10" id="OUO-0s-vIY"/>
+                            <constraint firstItem="mIX-vw-ZwD" firstAttribute="top" secondItem="xa3-Mt-R81" secondAttribute="bottom" constant="10" id="Vpb-i6-Yjj"/>
+                            <constraint firstAttribute="trailing" secondItem="mIX-vw-ZwD" secondAttribute="trailing" constant="10" id="YKm-3n-3e9"/>
+                            <constraint firstItem="mIX-vw-ZwD" firstAttribute="leading" secondItem="sXf-Dp-bfL" secondAttribute="leading" constant="10" id="uBV-zs-f11"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="脸部特效3D" id="hbX-Rj-dOy"/>
+                    <connections>
+                        <outlet property="imageView" destination="mIX-vw-ZwD" id="4Wr-Qc-BtB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bG4-QX-VkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-276" y="942"/>
+        </scene>
+    </scenes>
+</document>
